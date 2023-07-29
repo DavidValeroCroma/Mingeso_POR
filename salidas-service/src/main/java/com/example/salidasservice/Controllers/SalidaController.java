@@ -23,9 +23,9 @@ public class SalidaController {
     public ResponseEntity<ArrayList<SalidaEntity>> obtenerSalidas(){
         ArrayList<SalidaEntity> lista = salidaService.obtenerSalidas();
         if (lista.isEmpty()){
-            ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build();
         }
-        ResponseEntity.ok(lista);
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping("/upload")
