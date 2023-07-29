@@ -18,7 +18,7 @@ public class EntradaController {
     EntradaService entradaService;
 
     @GetMapping
-    private ResponseEntity<ArrayList<EntradaEntity>> listar(){
+    public ResponseEntity<ArrayList<EntradaEntity>> listar(){
         ArrayList<EntradaEntity> listar = entradaService.obtenerEntradas();
         if (listar.isEmpty()){
             return ResponseEntity.noContent().build();
@@ -26,8 +26,8 @@ public class EntradaController {
         return ResponseEntity.ok(listar);
     }
 
-    @PostMapping("/Upload")
-    private void uploadEntrada(EntradaEntity entrada){
+    @PostMapping("/upload")
+    public void uploadEntrada(EntradaEntity entrada){
         if (entrada == null){
             entradaService.guardarDb(entrada);
         }
