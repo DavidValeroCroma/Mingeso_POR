@@ -18,11 +18,10 @@ public class ResumenEntity {
     @Column(nullable=false, unique = true)
     private Long id;
     private Date fecha;
-    private Long codigo;
     private Long numero;
-    private Long monto_entrada;
-    private Long monto_salida;
-    private Long balance;
+    private Double monto_entrada;
+    private Double monto_salida;
+    private Double balance;
     private String tipo;
     private String motivo;
 

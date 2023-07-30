@@ -19,7 +19,7 @@ public class SalidaEntity {
     private Long id;
     private Date fecha;
     private Long numero;
-    private Long monto;
+    private Double monto;
     private String tipo;
     private String motivo;
 }

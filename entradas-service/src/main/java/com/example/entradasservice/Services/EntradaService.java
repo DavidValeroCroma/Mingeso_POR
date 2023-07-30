@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class EntradaService {
@@ -13,6 +14,19 @@ public class EntradaService {
     EntradaRepository entradaRepository;
 
     public ArrayList<EntradaEntity> obtenerEntradas(){return (ArrayList<EntradaEntity>)entradaRepository.findAll();}
+
+    public ArrayList<EntradaEntity> obtenerPorIntervaloFecha(Date fechaInicio, Date fechaFin) {
+        ArrayList<EntradaEntity> entradas = obtenerEntradas();
+        ArrayList<EntradaEntity> entradasAux = new ArrayList<>();
+
+        for (EntradaEntity entrada : entradas){
+            if(entrada.getFecha().compareTo(fechaInicio)>= 0 && entrada.getFecha().compareTo(fechaFin) <= 0){
+                entradasAux.add(entrada);
+            }
+        }
+
+        return entradasAux;
+    }
 
     public void guardarDb(EntradaEntity entrada){
         if(entrada.getMonto() > 0){

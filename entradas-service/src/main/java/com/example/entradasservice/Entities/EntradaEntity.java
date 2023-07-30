@@ -19,5 +19,5 @@ public class EntradaEntity {
     private Long id;
     private Date fecha;
     private Long numero;
-    private Long monto;
+    private Double monto;
 }

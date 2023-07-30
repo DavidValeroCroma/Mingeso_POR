@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/salida")
@@ -22,6 +23,15 @@ public class SalidaController {
     @GetMapping
     public ResponseEntity<ArrayList<SalidaEntity>> obtenerSalidas(){
         ArrayList<SalidaEntity> lista = salidaService.obtenerSalidas();
+        if (lista.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(lista);
+    }
+
+    @GetMapping
+    public ResponseEntity<ArrayList<SalidaEntity>> listarPorFecha(Date fechaInicio, Date fechaFinal){
+        ArrayList<SalidaEntity> lista = salidaService.obtenerPorIntervaloFecha(fechaInicio,fechaFinal);
         if (lista.isEmpty()){
             return ResponseEntity.noContent().build();
         }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/entrada")
@@ -20,6 +21,15 @@ public class EntradaController {
     @GetMapping
     public ResponseEntity<ArrayList<EntradaEntity>> listar(){
         ArrayList<EntradaEntity> listar = entradaService.obtenerEntradas();
+        if (listar.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(listar);
+    }
+
+    @GetMapping("/select")
+    public ResponseEntity<ArrayList<EntradaEntity>> listarPorFecha(Date fechaInicio, Date fechaFinal){
+        ArrayList<EntradaEntity> listar = entradaService.obtenerPorIntervaloFecha(fechaInicio,fechaFinal);
         if (listar.isEmpty()){
             return ResponseEntity.noContent().build();
         }

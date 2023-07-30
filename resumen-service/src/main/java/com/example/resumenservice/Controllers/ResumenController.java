@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/resumen")
@@ -27,10 +28,19 @@ public class ResumenController {
         return ResponseEntity.ok(resumenes);
     }
 
+    @GetMapping("/select")
+    public ResponseEntity<ArrayList<ResumenEntity>> obtenerPorIntervalo(Date fechaInicio, Date fechaFinal){
+        ArrayList<ResumenEntity> resumenes = resumenService.obtenerPorIntervaloFecha(fechaInicio,fechaFinal);
+        if (resumenes.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(resumenes);
+    }
+
     @PostMapping("/upload")
-    public void guardarResumen(ResumenEntity resumen){
-        if (resumen != null){
-            resumenService.guardaDB(resumen);
+    public void guardarResumen(Date fechaInicio, Date fechaFinal){
+        if (fechaInicio != null && fechaFinal != null){
+            resumenService.crearResumen(fechaInicio,fechaFinal);
         }
     }
 }
