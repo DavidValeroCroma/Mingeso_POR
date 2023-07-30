@@ -21,10 +21,10 @@ spring:
           predicates:
             - Path=/entradas/**
         - id: salidas-service
-          uri: http://localhost:8083/
+          uri: http://localhost:8002/
           predicates:
             - Path=/salidas/**
         - id: resumen-service
-          uri: http://localhost:8082/
+          uri: http://localhost:8003/
           predicates:
             - Path=/resumen/**
