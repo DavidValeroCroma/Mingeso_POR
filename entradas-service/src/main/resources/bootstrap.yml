@@ -1,7 +1,7 @@
 spring:
   devtools:
     restart:
-      aditional-paths: src/main/java
+      additional-paths: src/main/java
   application:
     name: entradas-service
   cloud:
@@ -18,3 +18,6 @@ spring:
     hibernate:
       dialect: org.hibernate.dialect.PostgreSQLDialect
       ddl-auto: create
+  config:
+    import:
+      configserver:
