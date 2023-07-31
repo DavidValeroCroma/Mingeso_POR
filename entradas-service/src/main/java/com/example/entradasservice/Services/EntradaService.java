@@ -5,6 +5,8 @@ import com.example.entradasservice.Repositories.EntradaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,17 +17,39 @@ public class EntradaService {
 
     public ArrayList<EntradaEntity> obtenerEntradas(){return (ArrayList<EntradaEntity>)entradaRepository.findAll();}
 
-    public ArrayList<EntradaEntity> obtenerPorIntervaloFecha(Date fechaInicio, Date fechaFin) {
-        ArrayList<EntradaEntity> entradas = obtenerEntradas();
-        ArrayList<EntradaEntity> entradasAux = new ArrayList<>();
+    public Date convertirString(String fechaString ){
 
-        for (EntradaEntity entrada : entradas){
-            if(entrada.getFecha().compareTo(fechaInicio)>= 0 && entrada.getFecha().compareTo(fechaFin) <= 0){
-                entradasAux.add(entrada);
-            }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = null;
+        try {
+            // Parsear el String a un objeto Date
+            fecha = sdf.parse(fechaString);
+            System.out.println("Fecha convertida: " + fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
-        return entradasAux;
+        return fecha;
+    }
+
+    public ArrayList<EntradaEntity> obtenerPorIntervaloFecha(String fechaInicio, String fechaFin) {
+
+        Date fechaI = convertirString(fechaInicio);
+        Date fechaF = convertirString(fechaFin);
+
+        ArrayList<EntradaEntity> entradas = obtenerEntradas();
+        ArrayList<EntradaEntity> entradasAux = new ArrayList<>();
+        if(fechaI != null && fechaF != null) {
+            for (EntradaEntity entrada : entradas) {
+                if (entrada.getFecha().compareTo(fechaI) >= 0 && entrada.getFecha().compareTo(fechaF) <= 0) {
+                    entradasAux.add(entrada);
+                }
+            }
+
+            return entradasAux;
+        }
+
+        return entradas;
     }
 
     public void guardarDb(EntradaEntity entrada){

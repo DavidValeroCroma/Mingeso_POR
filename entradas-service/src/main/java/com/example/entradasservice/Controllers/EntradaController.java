@@ -4,10 +4,7 @@ import com.example.entradasservice.Entities.EntradaEntity;
 import com.example.entradasservice.Services.EntradaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,17 +16,17 @@ public class EntradaController {
     EntradaService entradaService;
 
     @GetMapping
-    public ResponseEntity<ArrayList<EntradaEntity>> listar(){
-        ArrayList<EntradaEntity> listar = entradaService.obtenerEntradas();
+    public ResponseEntity<ArrayList<EntradaEntity>> listarPorFecha(@RequestParam(value = "fechaInicio") String fechaInicio, @RequestParam(value = "fechaFinal") String fechaFinal){
+        ArrayList<EntradaEntity> listar = entradaService.obtenerPorIntervaloFecha(fechaInicio,fechaFinal);
         if (listar.isEmpty()){
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(listar);
     }
 
-    @GetMapping("/select")
-    public ResponseEntity<ArrayList<EntradaEntity>> listarPorFecha(Date fechaInicio, Date fechaFinal){
-        ArrayList<EntradaEntity> listar = entradaService.obtenerPorIntervaloFecha(fechaInicio,fechaFinal);
+    @GetMapping("/list")
+    public ResponseEntity<ArrayList<EntradaEntity>> listar(){
+        ArrayList<EntradaEntity> listar = entradaService.obtenerEntradas();
         if (listar.isEmpty()){
             return ResponseEntity.noContent().build();
         }
