@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+/* ResumenList.css */
+
+.resumen-row {
+  border-bottom: 1px solid black; /* Barra de separación de color negro */
+}

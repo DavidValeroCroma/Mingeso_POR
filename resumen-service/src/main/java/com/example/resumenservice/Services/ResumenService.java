@@ -87,6 +87,7 @@ public class ResumenService {
         ArrayList<EntradaModel> entradas = obtenerEntrada(fechaInicio , fechaFinal);
         ArrayList<ResumenEntity> resumenes = new ArrayList<>();
         Double balance = 0.0;
+        Long idAux = 1L;
 
         if (salidas == null && entradas == null){
             return resumenes;
@@ -95,18 +96,23 @@ public class ResumenService {
             int i = 0;
             while (i < salidas.size()) {
                 ResumenEntity aux = calcularBalanceSalida(salidas.get(i), balance);
+                aux.setId(idAux);
                 resumenes.add(aux);
                 balance = balance - aux.getMonto_salida();
                 i++;
+                idAux++;
+
             }
 
         }else if (salidas == null){
             int j = 0;
             while (j < entradas.size()) {
                 ResumenEntity aux = calcularBalanceEntrada(entradas.get(j), balance);
+                aux.setId(idAux);
                 resumenes.add(aux);
                 balance = balance + aux.getMonto_entrada();
                 j++;
+                idAux++;
             }
 
         } else {
@@ -116,31 +122,39 @@ public class ResumenService {
             while (i < salidas.size() && j < entradas.size()) {
                 if (salidas.get(i).getFecha().compareTo(entradas.get(j).getFecha()) > 0) {
                     ResumenEntity aux = calcularBalanceEntrada(entradas.get(j), balance);
+                    aux.setId(idAux);
                     resumenes.add(aux);
                     balance = balance + aux.getMonto_entrada();
                     j++;
+                    idAux++;
                 } else {
                     ResumenEntity aux = calcularBalanceSalida(salidas.get(i), balance);
+                    aux.setId(idAux);
                     resumenes.add(aux);
                     balance = balance - aux.getMonto_salida();
                     i++;
+                    idAux++;
                 }
             }
 
             // Agregamos los elementos restantes de salidas (si los hay)
             while (i < salidas.size()) {
                 ResumenEntity aux = calcularBalanceSalida(salidas.get(i), balance);
+                aux.setId(idAux);
                 resumenes.add(aux);
                 balance = balance - aux.getMonto_salida();
                 i++;
+                idAux++;
             }
 
             // Agregamos los elementos restantes de entradas (si los hay)
             while (j < entradas.size()) {
                 ResumenEntity aux = calcularBalanceEntrada(entradas.get(j), balance);
+                aux.setId(idAux);
                 resumenes.add(aux);
                 balance = balance + aux.getMonto_entrada();
                 j++;
+                idAux++;
             }
         }
 

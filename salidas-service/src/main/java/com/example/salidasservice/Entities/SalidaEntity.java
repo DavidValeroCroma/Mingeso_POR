@@ -18,7 +18,7 @@ public class SalidaEntity {
     @Column(nullable=false, unique = true)
     private Long id;
     private Date fecha;
-    private Long numero;
+    private String numero;
     private Double monto;
     private String tipo;
     private String motivo;

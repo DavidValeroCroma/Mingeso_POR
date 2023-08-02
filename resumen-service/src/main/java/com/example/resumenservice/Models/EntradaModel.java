@@ -11,6 +11,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class EntradaModel {
     private Date fecha;
-    private Long numero;
+    private String numero;
     private Double monto;
 }

@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import HomeComponent from './components/HomeComponent';
+import EntradaForm from './components/EntradaComponent';
+import SalidaForm from './components/SalidaUpload';
+import ResumenList from './components/ResumenList';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+        <nav style={{ marginBottom: '20px' }}>
+          <Link to="/" style={linkStyle}>
+            Inicio
+          </Link>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<HomeComponent />} />
+          <Route path="/entrada" element={<EntradaForm />} />
+          <Route path="/salida" element={<SalidaForm />} />
+          <Route path="/resumen" element={<ResumenList />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
+
+const linkStyle = {
+  color: '#007bff',
+  textDecoration: 'none',
+  fontWeight: 'bold',
+};
 
 export default App;

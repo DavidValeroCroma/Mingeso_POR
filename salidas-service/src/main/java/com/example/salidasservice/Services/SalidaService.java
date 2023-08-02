@@ -15,11 +15,11 @@ public class SalidaService {
     @Autowired
     SalidaRepository salidaRepository;
 
-    public ArrayList<SalidaEntity> obtenerSalidas(){
+    public ArrayList<SalidaEntity> obtenerSalidas() {
         return (ArrayList<SalidaEntity>) salidaRepository.findAll();
     }
 
-    public Date convertirString(String fechaString ){
+    public Date convertirString(String fechaString) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date fecha = null;
@@ -54,10 +54,9 @@ public class SalidaService {
         return salidas;
     }
 
-    public void guardarDB(SalidaEntity salida){
-        if (salida.getMonto() > 0){
-            salidaRepository.save(salida);
-        }
+    public void guardarDB(SalidaEntity salida) {
+        System.out.println("Guardando...");
+        salidaRepository.save(salida);
+        System.out.println("Guardado");
     }
-
 }

@@ -37,7 +37,7 @@ public class SalidaController {
     }
 
     @PostMapping("/upload")
-    public void guardarSalida(SalidaEntity salida){
+    public void guardarSalida(@RequestBody SalidaEntity salida){
         if (salida != null){
             salidaService.guardarDB(salida);
         }

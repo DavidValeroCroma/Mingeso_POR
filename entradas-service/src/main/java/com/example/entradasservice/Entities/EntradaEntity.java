@@ -18,6 +18,6 @@ public class EntradaEntity {
     @Column(nullable=false, unique = true)
     private Long id;
     private Date fecha;
-    private Long numero;
+    private String numero;
     private Double monto;
 }

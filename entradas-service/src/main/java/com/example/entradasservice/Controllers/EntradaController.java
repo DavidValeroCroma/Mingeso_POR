@@ -34,8 +34,8 @@ public class EntradaController {
     }
 
     @PostMapping("/upload")
-    public void uploadEntrada(EntradaEntity entrada){
-        if (entrada == null){
+    public void uploadEntrada(@RequestBody EntradaEntity entrada){
+        if (entrada != null){
             entradaService.guardarDb(entrada);
         }
     }

@@ -13,7 +13,7 @@ import java.util.Date;
 public class ResumenEntity {
     private Long id;
     private Date fecha;
-    private Long numero;
+    private String numero;
     private Double monto_entrada;
     private Double monto_salida;
     private Double balance;

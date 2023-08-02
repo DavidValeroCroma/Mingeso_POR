@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-db-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  # Cambiar el origen del PV a uno de los tipos permitidos por Autopilot (csi, nfs, gcePersistentDisk)
+  persistentVolumeReclaimPolicy: Retain
+persistentVolumeSource:
+  # Reemplaza esta sección con el tipo de origen que estás utilizando (csi, nfs, gcePersistentDisk)
+  # Por ejemplo, para usar gcePersistentDisk, puedes hacerlo así:
+  gcePersistentDisk:
+    pdName: my-persistent-disk
+    fsType: ext4
